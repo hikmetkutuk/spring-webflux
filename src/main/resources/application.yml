@@ -1,0 +1,21 @@
+webflux:
+  database:
+    host: 127.0.0.1
+    port: 5436
+    name: webfluxDb
+    schema: public
+    username: postgres
+    password: postgres
+    pool:
+      initial: 3
+      max: 10
+
+spring:
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5435/webfluxDb
+    user: postgres
+    password: postgres
+    baseline-version: 0
+server:
+  port: 8081
