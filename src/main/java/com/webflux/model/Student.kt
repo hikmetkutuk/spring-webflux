@@ -15,7 +15,7 @@ import java.util.*
 @Table("student")
 data class Student(
     @Id
-    val id: UUID?,
+    val studentId: UUID? = null,
 
     val name: String,
 
@@ -31,12 +31,11 @@ data class Student(
     @Transient
     val isUpdated: Boolean = false
 ) : Serializable, Persistable<UUID> {
-
     override fun getId(): UUID? {
-        return id
+        return studentId
     }
 
     override fun isNew(): Boolean {
-        return !isUpdated || id == null
+        return !isUpdated
     }
 }

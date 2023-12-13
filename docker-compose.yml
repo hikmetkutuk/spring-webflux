@@ -1,0 +1,17 @@
+version: '3.6'
+services:
+  webflux-db:
+    image: postgres:13.1
+    container_name: webflux-db
+    restart: always
+    environment:
+      POSTGRES_DB: webflux-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5436:5432"
+    volumes:
+      - webflux-db:/var/lib/postgresql/data
+
+volumes:
+  webflux-db: {}
