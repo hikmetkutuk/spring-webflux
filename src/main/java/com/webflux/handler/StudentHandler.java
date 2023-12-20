@@ -1,4 +1,4 @@
-package com.webflux.router;
+package com.webflux.handler;
 
 import com.webflux.service.StudentService;
 import org.springframework.stereotype.Component;

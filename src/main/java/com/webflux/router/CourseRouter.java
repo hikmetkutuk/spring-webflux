@@ -1,10 +1,12 @@
 package com.webflux.router;
 
 import com.webflux.dto.CourseResponse;
+import com.webflux.handler.CourseHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +38,7 @@ public class CourseRouter {
                     operation =
                     @Operation(
                             operationId = "createCourse",
+                            tags = "course",
                             summary = "Create new course",
                             description = "Create new course",
                             responses =

@@ -1,6 +1,7 @@
 package com.webflux.router;
 
 import com.webflux.dto.StudentListResponse;
+import com.webflux.handler.StudentHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,6 +37,7 @@ public class StudentRouter {
                     operation =
                     @Operation(
                             operationId = "getAllStudentWithCourses",
+                            tags = "student",
                             summary = "Get all students with courses",
                             description = "Get all students with courses",
                             responses =
