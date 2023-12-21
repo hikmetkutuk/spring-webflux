@@ -18,8 +18,12 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public Flux<Course> getAllCourses() {
-        return courseRepository.findAll();
+    public Flux<CourseResponse> getAllCourses() {
+        return courseRepository.findAll()
+                .flatMap(course -> {
+                    CourseResponse courseResponse = new CourseResponse(course.getName(), course.getDescription(), course.getDuration(), course.getCourseMetadata());
+                    return Mono.just(courseResponse);
+                });
     }
 
     public Mono<CourseResponse> getCourseById(UUID id) {

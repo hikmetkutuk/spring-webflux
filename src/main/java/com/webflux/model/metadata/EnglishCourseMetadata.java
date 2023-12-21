@@ -12,7 +12,6 @@ import java.util.List;
 @SuperBuilder
 @ToString(callSuper = true)
 public class EnglishCourseMetadata extends CourseMetadata {
-
     private String level;
     private List<String> books;
 }

@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.context.annotation.Bean;
@@ -21,8 +20,9 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 
 @Configuration
 public class CourseRouter {
-    public static final String COURSE_ROUTE = "/v1/api/course";
+    public static final String COURSE_ROUTE = "/api/v1/course";
     public static final String COURSE_CREATE = "/create";
+    public static final String COURSE_LIST = "/list";
 
     private final CourseHandler courseHandler;
 
@@ -31,14 +31,13 @@ public class CourseRouter {
     }
 
     @Bean
-    @RouterOperations(
+    @RouterOperations({
             @RouterOperation(
                     path = COURSE_CREATE,
                     method = RequestMethod.POST,
                     operation =
                     @Operation(
                             operationId = "createCourse",
-                            tags = "course",
                             summary = "Create new course",
                             description = "Create new course",
                             responses =
@@ -48,8 +47,24 @@ public class CourseRouter {
                                     content = @Content(schema = @Schema(implementation = CourseResponse.class))
                             )
                     )
-            )
-    )
+            ),
+            @RouterOperation(
+                    path = COURSE_LIST,
+                    method = RequestMethod.GET,
+                    operation =
+                    @Operation(
+                            operationId = "getAllCourses",
+                            summary = "get All Courses",
+                            description = "get All Courses",
+                            responses =
+                            @ApiResponse(
+                                    responseCode = "200",
+                                    description = "get All Courses",
+                                    content = @Content(schema = @Schema(implementation = CourseResponse.class))
+                            )
+                    )
+            ),
+    })
 
     public RouterFunction<ServerResponse> createCourse() {
         return RouterFunctions.nest(
@@ -57,6 +72,15 @@ public class CourseRouter {
                 RouterFunctions.route(
                         POST(COURSE_CREATE).and(accept(MediaType.APPLICATION_JSON)),
                         courseHandler::handleCreateCourse)
+        );
+    }
+
+    public RouterFunction<ServerResponse> getAllCourses() {
+        return RouterFunctions.nest(
+                path(COURSE_ROUTE),
+                RouterFunctions.route(
+                        GET(COURSE_LIST).and(accept(MediaType.APPLICATION_JSON)),
+                        courseHandler::handleGetAllCourses)
         );
     }
 }
