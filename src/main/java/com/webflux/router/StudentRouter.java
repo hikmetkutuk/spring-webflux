@@ -1,6 +1,7 @@
 package com.webflux.router;
 
 import com.webflux.dto.StudentListResponse;
+import com.webflux.dto.StudentResponse;
 import com.webflux.handler.StudentHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,7 +21,8 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 
 @Configuration
 public class StudentRouter {
-    public static final String STUDENT_ROUTE = "/v1/student";
+    public static final String STUDENT_ROUTE = "/api/v1/student";
+    public static final String STUDENT_CREATE_ROUTE = "/create";
     public static final String STUDENT_COURSES_ROUTE = "/courses";
 
     private final StudentHandler studentHandler;
@@ -30,14 +32,13 @@ public class StudentRouter {
     }
 
     @Bean
-    @RouterOperations(
+    @RouterOperations({
             @RouterOperation(
                     path = STUDENT_COURSES_ROUTE,
                     method = RequestMethod.GET,
                     operation =
                     @Operation(
                             operationId = "getAllStudentWithCourses",
-                            tags = "student",
                             summary = "Get all students with courses",
                             description = "Get all students with courses",
                             responses =
@@ -47,10 +48,35 @@ public class StudentRouter {
                                     content = @Content(schema = @Schema(implementation = StudentListResponse.class))
                             )
                     )
+            ),
+            @RouterOperation(
+                    path = STUDENT_CREATE_ROUTE,
+                    method = RequestMethod.POST,
+                    operation =
+                    @Operation(
+                            operationId = "createStudent",
+                            summary = "Create new student",
+                            description = "Create new student",
+                            responses =
+                            @ApiResponse(
+                                    responseCode = "201",
+                                    description = "Create new student",
+                                    content = @Content(schema = @Schema(implementation = StudentResponse.class))
+                            )
+                    )
             )
-    )
+    })
 
-    public RouterFunction<ServerResponse> findAllStudentWithCourses() {
+    public RouterFunction<ServerResponse> createStudent() {
+        return RouterFunctions.nest(
+                path(STUDENT_ROUTE),
+                RouterFunctions.route(
+                        POST(STUDENT_CREATE_ROUTE).and(accept(MediaType.APPLICATION_JSON)),
+                        studentHandler::handleCreateStudent)
+        );
+    }
+
+    public RouterFunction<ServerResponse> getAllStudentWithCourses() {
         return RouterFunctions.nest(
                 path(STUDENT_ROUTE),
                 RouterFunctions.route(

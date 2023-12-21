@@ -1,5 +1,6 @@
 package com.webflux.handler;
 
+import com.webflux.dto.StudentRequest;
 import com.webflux.service.StudentService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -14,10 +15,18 @@ public class StudentHandler {
         this.studentService = studentService;
     }
 
-    public Mono<ServerResponse> handleGetAllStudentWithCourses(ServerRequest serverRequest) {
+    public Mono<ServerResponse> handleGetAllStudentWithCourses(ServerRequest request) {
         return studentService.getAllStudentWithCourses()
                 .flatMap(s -> ServerResponse.ok().bodyValue(s))
                 .switchIfEmpty(
                         Mono.defer(() -> Mono.error(new RuntimeException("No student found"))));
+    }
+
+    public Mono<ServerResponse> handleCreateStudent(ServerRequest serverRequest) {
+        return serverRequest
+                .bodyToMono(StudentRequest.class)
+                .flatMap(studentService::createStudent)
+                .flatMap(createdStudent -> ServerResponse.ok().bodyValue(createdStudent))
+                .onErrorResume(error -> ServerResponse.badRequest().bodyValue(error.getMessage()));
     }
 }

@@ -2,7 +2,6 @@ package com.webflux.controller;
 
 import com.webflux.dto.CourseRequest;
 import com.webflux.dto.CourseResponse;
-import com.webflux.model.Course;
 import com.webflux.service.CourseService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;

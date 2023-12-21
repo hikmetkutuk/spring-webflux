@@ -37,7 +37,6 @@ public class Student implements Serializable, Persistable<UUID> {
 
     private String email;
 
-
     @Column("course_id")
     private Set<String> courses;
 
