@@ -1,7 +1,7 @@
 package com.webflux.service;
 
-import com.webflux.dto.CourseRequest;
-import com.webflux.dto.CourseResponse;
+import com.webflux.dto.request.CourseRequest;
+import com.webflux.dto.response.CourseResponse;
 import com.webflux.model.Course;
 import com.webflux.repository.CourseRepository;
 import org.springframework.stereotype.Service;

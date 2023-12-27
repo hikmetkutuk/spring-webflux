@@ -1,4 +1,4 @@
-package com.webflux.dto;
+package com.webflux.dto.response;
 
 import java.util.List;
 

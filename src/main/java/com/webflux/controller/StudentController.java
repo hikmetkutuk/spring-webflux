@@ -1,7 +1,7 @@
 package com.webflux.controller;
 
-import com.webflux.dto.StudentRequest;
-import com.webflux.dto.StudentResponse;
+import com.webflux.dto.request.StudentRequest;
+import com.webflux.dto.response.StudentResponse;
 import com.webflux.service.StudentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.PostMapping;

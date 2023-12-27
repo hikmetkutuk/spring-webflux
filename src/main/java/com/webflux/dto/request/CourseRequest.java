@@ -1,4 +1,4 @@
-package com.webflux.dto;
+package com.webflux.dto.request;
 
 import com.webflux.model.metadata.CourseMetadata;
 

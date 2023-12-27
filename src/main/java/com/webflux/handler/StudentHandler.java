@@ -1,6 +1,6 @@
 package com.webflux.handler;
 
-import com.webflux.dto.StudentRequest;
+import com.webflux.dto.request.StudentRequest;
 import com.webflux.service.StudentService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;

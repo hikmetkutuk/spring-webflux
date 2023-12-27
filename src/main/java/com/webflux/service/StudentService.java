@@ -1,9 +1,9 @@
 package com.webflux.service;
 
-import com.webflux.dto.CourseResponse;
-import com.webflux.dto.StudentListResponse;
-import com.webflux.dto.StudentRequest;
-import com.webflux.dto.StudentResponse;
+import com.webflux.dto.response.CourseResponse;
+import com.webflux.dto.response.StudentListResponse;
+import com.webflux.dto.request.StudentRequest;
+import com.webflux.dto.response.StudentResponse;
 import com.webflux.model.Student;
 import com.webflux.repository.StudentRepository;
 import org.slf4j.Logger;
