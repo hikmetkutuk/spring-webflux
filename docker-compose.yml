@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   webflux-db:
-    image: postgres:13.1
+    image: postgres:15.5
     container_name: webflux-db
     restart: always
     environment:
